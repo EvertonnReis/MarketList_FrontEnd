@@ -15,8 +15,10 @@
                   <label for="password">Senha</label>
                   <input v-model="password" type="password" class="form-control" id="password">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                <button type="button" class="btn btn-secondary btn-block">Cadastrar-se</button>
+                <div class="button-container">
+                  <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                  <router-link to="/cadastro" class="btn btn-primary btn-block">Cadastrar-se</router-link>
+                </div>
               </form>
             </div>
           </div>
@@ -66,9 +68,11 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     margin-top: 100px;
   }
-  button{
+  .button-container {
     margin-left: 10px;
+    margin-right: 10px;
     margin-top: 10px;
+    gap: 10px;
   }
   .row {
     margin: 0;

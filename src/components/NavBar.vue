@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-black">
     <div class="container">
-      <a class="navbar-brand" href="#">MarketList</a>
+      <a class="navbar-brand" href="/">MarketList</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -21,6 +21,12 @@
           <li class="nav-item">
             <router-link to="/about" class="nav-link">Sobre</router-link>
           </li>
+          <li class="nav-item">
+            <router-link to="#" class="nav-link">Lista</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="#" class="nav-link">Grupo</router-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -29,7 +35,11 @@
 
 <script>
 export default {
-
+  methods: {
+  redirectToCriarLista() {
+    this.$router.push({ name: 'CriarListaCompras' });
+  }
+}
 };
 </script>
 <style>

@@ -5,7 +5,12 @@ import Navbar from "../components/NavBar.vue";
 <template>
   <div class="black-background">
     <Navbar />
-    <h1>Bem-vindo à Usuário Home View</h1>
+    <div class="button-container">
+      <button class="btn btn-secondary">Criar Lista de Compras</button>
+      <button class="btn btn-secondary">Ver Lista de Compras</button>
+      <button class="btn btn-secondary">Criar Grupo</button>
+      <button class="btn btn-secondary">Ver Meus Grupos</button>
+    </div>
   </div>
 </template>
 
@@ -20,6 +25,13 @@ import Navbar from "../components/NavBar.vue";
   text-align: center;
   min-height: 100vh;
   padding: 0;
+}
+.button-container{
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  gap: 10px;
 }
 </style>
 
