@@ -31,10 +31,12 @@
 </template>
 
 <script>
+import axios from "axios";
+const API_BASE_URL = "https://localhost:7099";
+
 export default {
   data() {
     return {
-      isMobile: false,
       usuario: {
         nome: "",
         email: "",
@@ -42,19 +44,24 @@ export default {
       }
     };
   },
-  mounted() {
-    if (window.innerWidth <= 768) {
-      this.isMobile = true;
-    }
-  },
   methods: {
-    cadastrarUsuario() {
-      console.log("Dados do usuário a serem cadastrados:", this.usuario);
-      this.$router.push({ name: "Login" });
+    async cadastrarUsuario() {
+      try {
+        const response = await axios.post(`${API_BASE_URL}/api/usuario`, this.usuario);
+
+        if (response.status === 200) {
+          console.log("Usuário cadastrado com sucesso:", response.data);
+
+          this.$router.push({ name: "Login" });
+        }
+      } catch (error) {
+        console.error("Erro ao cadastrar o usuário:", error);
+      }
     }
   }
 };
 </script>
+
 
 <style scoped>
 .black-background {

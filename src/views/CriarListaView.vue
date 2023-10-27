@@ -47,15 +47,15 @@ export default {
   },
   methods: {
     async criarLista() {
-      const novaLista = {
+      const listaDeCompras = {
         Nome: this.nomeLista,
-        DataCriacao: new Date().toISOString(), // Data atual no formato ISO
-        Descricao: "Descrição da lista (opcional)", // Substitua pela descrição desejada
-        UsuarioId: 1 // Substitua pelo ID do usuário apropriado
+        DataCriacao: new Date().toISOString(),
+        Descricao: "Descrição da lista (opcional)",
+        UsuarioId: 1
       };
 
       try {
-        const response = await axios.post(`${API_BASE_URL}/api/listadecompras`, novaLista);
+        const response = await axios.post("https://localhost:7099/api/listadecompras", listaDeCompras);
         if (response.status === 200) {
           console.log("Nova lista de compras criada:", response.data);
           this.nomeLista = "";
