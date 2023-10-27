@@ -6,8 +6,8 @@ import Navbar from "../components/NavBar.vue";
   <div class="black-background">
     <Navbar />
     <div class="button-container">
-      <button class="btn btn-secondary">Criar Lista de Compras</button>
-      <button class="btn btn-secondary">Ver Lista de Compras</button>
+      <router-link to="/criar-lista" class="btn btn-secondary">Criar Lista de Compras</router-link>
+      <router-link to="/ver-lista" class="btn btn-secondary">Ver Lista de Compras</router-link>
       <button class="btn btn-secondary">Criar Grupo</button>
       <button class="btn btn-secondary">Ver Meus Grupos</button>
     </div>

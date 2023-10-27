@@ -3,7 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import UsuarioHomeView from '../views/UsuarioHomeView.vue'
 import CadastroView from '../views/CadastroView.vue'
-import CriarListaComprasView from '../views/CriarListaCompras.vue';
+import CriarListaComprasView from '../views/CriarListaView.vue';
+import VerListaComprasView from '../views/VerListaView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +37,11 @@ const router = createRouter({
       path: "/criar-lista",
       name: "CriarListaCompras",
       component: CriarListaComprasView,
+    },
+    {
+      path: "/ver-lista",
+      name: "VerListaCompras",
+      component: VerListaComprasView,
     }
   ]
 })
