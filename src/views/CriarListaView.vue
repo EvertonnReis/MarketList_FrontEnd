@@ -11,16 +11,8 @@
                 <input v-model="nomeLista" type="text" class="form-control" id="nomeLista">
               </div>
               <div class="form-group">
-                <label for="itemsLista">Itens da Lista:</label>
-                <div v-for="(item, index) in listaItens" :key="index">
-                  <div class="d-flex align-items-center">
-                    <input type="checkbox" v-model="item.checked" class="mr-2">
-                    <input v-model="item.nome" type="text" placeholder="Nome do item" class="form-control mr-2">
-                    <input v-model="item.valor" type="text" placeholder="Valor (opcional)" class="form-control">
-                    <button @click="removerItem(index)" class="btn btn-danger btn-sm ml-2">Remover</button>
-                  </div>
-                </div>
-                <button @click="adicionarItem" class="btn btn-primary mt-2">Adicionar Item</button>
+                <label for="descricaoLista">Descrição da Lista:</label>
+                <input v-model="descricaoLista" type="text" class="form-control" id="descricaoLista">
               </div>
               <div class="button-container">
                 <button type="submit" class="btn btn-primary btn-block">Criar Lista</button>
@@ -36,46 +28,43 @@
 
 <script>
 import axios from "axios";
-const API_BASE_URL = "https://localhost:7099";
+// const API_BASE_URL = "https://localhost:7099";
 
 export default {
   data() {
     return {
       nomeLista: "",
-      listaItens: [{ nome: "", valor: "", checked: false }]
+      descricaoLista: "",
     };
   },
   methods: {
     async criarLista() {
       const listaDeCompras = {
         Nome: this.nomeLista,
-        DataCriacao: new Date().toISOString(),
-        Descricao: "Descrição da lista (opcional)",
-        UsuarioId: 1
+        Descricao: this.descricaoLista,
+        Usuario_Id: 1,
+        Data_Criacao: new Date().toISOString(),
       };
 
       try {
         const response = await axios.post("https://localhost:7099/api/listadecompras", listaDeCompras);
+
         if (response.status === 200) {
           console.log("Nova lista de compras criada:", response.data);
-          this.nomeLista = "";
-          this.listaItens = [{ nome: "", valor: "", checked: false }];
+          this.$router.push({ name: 'AdicionarItens', params: { listaId: response.data.Id } });
         }
       } catch (error) {
         console.error("Erro ao criar a lista de compras:", error);
       }
     },
-    adicionarItem() {
-      this.listaItens.push({ nome: "", valor: "", checked: false });
-    },
-    removerItem(index) {
-      this.listaItens.splice(index, 1);
-    }
-  }
+  },
 };
 </script>
 
 <style scoped>
+.btn-block {
+  margin-left: 10px;
+}
 .black-background {
   background-color: black;
   text-align: center;
