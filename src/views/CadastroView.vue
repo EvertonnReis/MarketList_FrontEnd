@@ -2,25 +2,31 @@
   <div>
     <div class="black-background">
       <div class="container">
-        <div class="row justify-content-center align-items-center h-100">
+        <div class="row align-items-center h-100">
+          <div class="imgleft col-md-6">
+            <img src="src/img/teste22.png" alt="Teste" class="img-fluid h-100">
+          </div>
           <div class="col-md-6 white-container">
-            <img src="src/img/logo.png" alt="Logo" class="img-fluid mb-4">
-            <h1 class="name"></h1>
             <form @submit.prevent="cadastrarUsuario">
+              <div class="logo">
+                <h1>Welcome to MarketList!</h1>
+                <img src="src/img/logo.png" alt="Logo" class="img-fluid mb-4">
+                <h2>Register</h2>
+              </div>
               <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input v-model="usuario.nome" type="text" class="form-control" id="nome">
               </div>
-              <div class="form-group">
+              <div class="form-group2">
                 <label for="email">E-mail:</label>
                 <input v-model="usuario.email" type="email" class="form-control" id="email">
               </div>
-              <div class="form-group">
+              <div class="form-group2">
                 <label for="senha">Senha:</label>
                 <input v-model="usuario.senha" type="password" class="form-control" id="senha">
               </div>
               <div class="button-container">
-                <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                <button type="submit" class="btn btn-outline-primary btn-block">Cadastrar</button>
               </div>
             </form>
           </div>
@@ -71,21 +77,72 @@ export default {
   padding: 0;
 }
 
-.white-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  margin-top: 100px;
+.form-group {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
+.form-group2 {
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .button-container {
-  margin-left: 10px;
   margin-top: 10px;
+  gap: 10px;
 }
 
 .row {
   margin: 0;
   padding: 0;
+}
+
+.logo {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.logo img {
+  width: 90px;
+}
+
+.logo h1 {
+  text-align: center;
+  font-size: 30px;
+}
+
+body {
+  overflow: hidden;
+}
+
+.button-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-cadastrar {
+  margin-top: 10px;
+}
+.imgleft {
+  position: absolute;
+  width: 980px;
+  height: 750px;
+  z-index: 0;
+  margin-left: -97px;
+}
+
+.white-container {
+  position: relative; 
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin-left: auto;
+  margin-right: -72px;
+  width: calc(100% - 800px);
+  height: 100vh;
+  z-index: 1;
 }
 </style>

@@ -10,9 +10,11 @@
                 <label for="nomeLista">Nome da Lista:</label>
                 <input v-model="nomeLista" type="text" class="form-control" id="nomeLista">
               </div>
-              <div class="form-group">
-                <label for="descricaoLista">Descrição da Lista:</label>
-                <input v-model="descricaoLista" type="text" class="form-control" id="descricaoLista">
+              <div class="form-group mb-3">
+                <!-- arrumar -->
+                <label for="exampleFormControlTextarea1" class="form-label">Descrição da Lista:</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <!-- arrumar -->
               </div>
               <div class="button-container">
                 <button type="submit" class="btn btn-primary btn-block">Criar Lista</button>
@@ -77,12 +79,21 @@ export default {
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  margin-top: 100px;
+  margin-top: 70px;
+  margin-bottom: 70px;
+  margin-left: 70px;
+  margin-right: 70px;
+  width: 1000px;
+  height: 600px;
 }
 
 .button-container {
   margin-left: 10px;
-  margin-top: 10px;
+  margin-top: 20px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .row {
