@@ -11,10 +11,8 @@
                 <input v-model="nomeLista" type="text" class="form-control" id="nomeLista">
               </div>
               <div class="form-group mb-3">
-                <!-- arrumar -->
-                <label for="exampleFormControlTextarea1" class="form-label">Descrição da Lista:</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                <!-- arrumar -->
+                <label for="descricaoLista" class="form-label">Descrição da Lista:</label>
+                <textarea v-model="descricaoLista" class="form-control" id="descricaoLista" rows="3"></textarea>
               </div>
               <div class="button-container">
                 <button type="submit" class="btn btn-primary btn-block">Criar Lista</button>
@@ -30,6 +28,7 @@
 
 <script>
 import axios from "axios";
+import userState from '../../userState';
 // const API_BASE_URL = "https://localhost:7099";
 
 export default {
@@ -44,7 +43,7 @@ export default {
       const listaDeCompras = {
         Nome: this.nomeLista,
         Descricao: this.descricaoLista,
-        Usuario_Id: 1,
+        Usuario_Id: userState.userId,
         Data_Criacao: new Date().toISOString(),
       };
 
@@ -53,7 +52,8 @@ export default {
 
         if (response.status === 200) {
           console.log("Nova lista de compras criada:", response.data);
-          this.$router.push({ name: 'AdicionarItens', params: { listaId: response.data.Id } });
+          this.$router.push({ name: 'VerListas' });
+
         }
       } catch (error) {
         console.error("Erro ao criar a lista de compras:", error);
@@ -67,6 +67,7 @@ export default {
 .btn-block {
   margin-left: 10px;
 }
+
 .black-background {
   background-color: black;
   text-align: center;

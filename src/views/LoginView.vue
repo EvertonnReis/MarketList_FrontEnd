@@ -3,21 +3,19 @@
     <div class="black-background">
       <div class="container">
         <div class="row align-items-center h-100">
-          <!-- Coluna com a imagem à esquerda -->
           <div class="imgleft col-md-6">
-            <img src="src/img/teste22.png" alt="Teste" class="img-fluid h-100">
+            <!-- <img src="src/img/teste22.png" alt="Teste" class="img-fluid"> -->
           </div>
-          <!-- Coluna com o formulário à direita -->
           <div class="col-md-6 white-container">
             <form @submit.prevent="loginUsuario" class="text-right">
               <div class="logo">
-                <h1>Welcome to MarketList!</h1>
+                <h1>Bem vindo ao MarketList!</h1>
                 <img src="src/img/logo.png" alt="Logo" class="img-fluid mb-4">
-                <h2>Login to continue</h2>
+                <h2>Login para continuar</h2>
               </div>
               <div class="form-group">
-                <label for="email">E-mail:</label>
-                <input v-model="email" type="email" class="form-control" id="email" placeholder="E-mail">
+                <label for="nome_usuario">Nome de Usuário:</label>
+                <input v-model="nome_usuario" type="nome_usuario" class="form-control" id="nome_usuario" placeholder="Nome de Usuário">
               </div>
               <div class="form-group2">
                 <label for="senha">Senha:</label>
@@ -26,6 +24,9 @@
               <div class="button-container">
                 <button type="submit" class="btn btn-outline-primary btn-block">Entrar</button>
                 <router-link to="/cadastro" class="btn btn-outline-primary btn-cadastrar">Cadastrar-se</router-link>
+              </div>
+              <div v-if="loginError" class="error-message">
+                Credenciais inválidas. Por favor, verifique seu nome de usuário e senha.
               </div>
             </form>
           </div>
@@ -37,14 +38,16 @@
 
 <script>
 import axios from "axios";
+import userState from '../../userState';
 const API_BASE_URL = "https://localhost:7099";
 
 export default {
   data() {
     return {
       isMobile: false,
-      email: "",
-      senha: ""
+      nome_usuario: "",
+      senha: "",
+      loginError: false,
     };
   },
   mounted() {
@@ -55,16 +58,28 @@ export default {
   methods: {
     async loginUsuario() {
       try {
-        const response = await axios.get(`${API_BASE_URL}/api/usuario?email=${this.email}&senha=${this.senha}`);
+        const response = await axios.post(`${API_BASE_URL}/v1/account/login`, {
+          Nome_usuario: this.nome_usuario,
+          Senha: this.senha,
+        });
 
-        if (response.status === 200 && response.data !== null) {
-          console.log("Login bem-sucedido:", response.data);
+        if (response.status === 200 && response.data.token) {
+          console.log("Login bem-sucedido.");
+          userState.userId = response.data.user.id;
+          this.token = response.data.token;
           this.$router.push({ name: "UsuarioHome" });
         } else {
+          this.loginError = true;
           console.log("Credenciais inválidas.");
         }
       } catch (error) {
         console.error("Erro ao fazer login:", error);
+        // Adicione tratamento de erro aqui, por exemplo:
+        if (error.response.status === 401) {
+          console.log("Credenciais inválidas.");
+        } else {
+          console.error("Erro desconhecido ao fazer login:", error);
+        }
       }
     }
   }
@@ -82,11 +97,11 @@ export default {
 .form-group {
   text-align: center;
   margin-top: 60px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .form-group2 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-align: center;
 }
 
@@ -128,16 +143,17 @@ body {
 .btn-cadastrar {
   margin-top: 10px;
 }
-.imgleft {
+
+/* .imgleft {
   position: absolute;
   width: 980px;
   height: 750px;
   z-index: 0;
   margin-left: -97px;
-}
+} */
 
 .white-container {
-  position: relative; 
+  position: relative;
   background-color: white;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);

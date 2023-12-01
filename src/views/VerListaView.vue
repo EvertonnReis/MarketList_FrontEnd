@@ -3,49 +3,82 @@
     <div class="black-background">
       <div class="container">
         <div class="row justify-content-center align-items-center h-100">
-          <div class="col-md-6 white-container">
+          <div class="col-md-8 white-container">
             <h1>Listas de Compras</h1>
-            <ul>
-              <router-link
-                v-for="lista in listas"
-                :key="lista.id"
-                :to="{ name: 'DetalhesLista', params: { listaId: lista.id } }"
-              >
-                <li>{{ lista.nome }}</li>
-              </router-link>
-            </ul>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nome da Lista</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="lista in listas" :key="lista.id">
+                  <td>{{ lista.id }}</td>
+                  <td>{{ lista.nome }}</td>
+                  <td>
+                    <router-link :to="{ name: 'AdicionarItens', params: { listaId: lista.id } }" class="btn btn-primary btn-sm">
+                      Adicionar Itens
+                    </router-link>
+                    <router-link :to="{ name: 'VerItensLista', params: { listaId: lista.id } }" class="btn btn-success btn-sm">
+                      Ver Itens
+                    </router-link>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
             <router-link to="/criar-lista" class="btn btn-primary btn-block">Criar Lista</router-link>
           </div>
         </div>
       </div>
     </div>
+    />
   </div>
 </template>
-  
+
 <script>
 import axios from "axios";
+import userState from '../../userState';
 
 export default {
   data() {
     return {
-      listas: []
+      listas: [],
+      modalAdicionarItensAberto: false,
+      listaIdSelecionada: null
     };
   },
   created() {
-    // Assumindo que você tem o ID do usuário disponível, substitua "ID_DO_USUARIO" pelo valor correto.
-    const userId = 6;
+    this.loading = true;
 
-    axios.get(`https://localhost:7099/api/listadecompras/${userId}`)
+    const userId = userState.userId;
+
+    axios.get(`https://localhost:7099/api/listadecompras?Usuario_Id=${userId}`)
       .then(response => {
         this.listas = response.data;
       })
       .catch(error => {
         console.error('Erro ao buscar listas de compras:', error);
+        this.error = 'Erro ao buscar listas de compras. Por favor, tente novamente.';
+      })
+      .finally(() => {
+        this.loading = false;
       });
+  },
+  methods: {
+    abrirModalAdicionarItens(listaId) {
+      this.modalAdicionarItensAberto = true;
+      this.listaIdSelecionada = listaId;
+    },
+    fecharModalAdicionarItens() {
+      this.modalAdicionarItensAberto = false;
+      this.listaIdSelecionada = null;
+    },
   }
 };
 </script>
-  
+
 <style scoped>
 .black-background {
   background-color: black;
@@ -62,7 +95,7 @@ export default {
   margin-top: 100px;
 }
 
-button {
+.button-container {
   margin-top: 10px;
 }
 

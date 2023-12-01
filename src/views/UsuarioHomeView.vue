@@ -4,7 +4,7 @@
     <div class="menu">
       <div class="criarlista">
         <div class="text-container">
-          <img src="src/img/ImgCreateOFC.jpeg" alt="">
+          <img src="src/img/ImgCreateOFC.jpeg" class="img-group">
           <div class="text-content">
             <p>
               Cansado de perder tempo escrevendo suas compras em papel e sempre esquecer algo importante?
@@ -16,31 +16,43 @@
               Experimente a praticidade de uma lista digital!
             </p>
             <div class="button-container">
-              <button type="button" class="button btn btn-primary">Criar lista</button>
-              <button type="button" class="button btn btn-primary">Ver listas</button>
+              <router-link to="/criar-lista" type="button" class="button btn btn-primary">Criar lista</router-link>
+              <router-link to="/ver-lista" type="button" class="button btn btn-primary">Ver listas</router-link>
             </div>
           </div>
         </div>
       </div>
       <div class="group">
         <div class="foto">
-          <img src="src/img/ImgGroupp.jpeg" alt="">
+          <img src="src/img/ImgGroupp.jpeg" class="img-group">
         </div>
         <div class="txt2">
           <p>Deseja compartilhar a sua lista com seus amigos ou familiares?</p>
           <p>Crie seu grupo já!</p>
         </div>
-          <div class="button-container2">
-            <button type="button" class="button btn btn-primary">Criar Grupo</button>
-            <button type="button" class="button btn btn-primary">Ver Grupos</button>
-         </div>
+        <div class="button-container2">
+          <router-link to="/criar-grupo" type="button" class="button btn btn-primary">Criar grupo</router-link>
+          <router-link to="/ver-grupo" type="button" class="button btn btn-primary">Ver grupos</router-link>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import Navbar from "../components/NavBar.vue";
+import Navbar from "../components/navbar.vue";
+</script>
+
+<script>
+import userState from '../../userState'; 
+
+export default {
+  methods: {
+    getUserId() {
+      return userState.userId;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -95,47 +107,53 @@ import Navbar from "../components/NavBar.vue";
 }
 
 .button-container {
-  display: flex;
   gap: 20px; 
   margin-top: 30px; 
   white-space: normal;
 }
 
-.button-container button {
-  white-space: normal;
+.button-container router-link {
+  display: flex;
   padding: 5px 100px; 
   font-size: 18px; 
+  margin-top: 20px;
 }
 .group {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between; 
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .foto {
   width: 40%;
   height: auto;
   margin-top: 30px;
+  flex-shrink: 0;
 }
-
 .txt2 {
   color: white;
-  margin-top: 10px;
-  margin-right: 20px; 
+  margin-top: 30px;
+  margin-left: -110px;
+  white-space: normal;
+  flex: 1;
 }
 
 .button-container2 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 10px;
+  position: relative;
+  margin-top: 100px; 
+  left: -650px; 
 }
-
-.button-container2 button {
+.button-container2 router-link{
+  display: block;
   white-space: normal;
-  padding: 5px 50px;
+  padding: 5px 100px;
   font-size: 18px;
-  margin-top: 5px;
+  margin-top: 20px;
+  gap: 10px;
 }
-
+#img{
+  width: 500px;
+}
 </style>

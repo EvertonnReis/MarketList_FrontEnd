@@ -9,13 +9,17 @@
           <div class="col-md-6 white-container">
             <form @submit.prevent="cadastrarUsuario">
               <div class="logo">
-                <h1>Welcome to MarketList!</h1>
+                <h1>Bem vindo ao MarketList!</h1>
                 <img src="src/img/logo.png" alt="Logo" class="img-fluid mb-4">
-                <h2>Register</h2>
+                <h2>Registre-se</h2>
               </div>
               <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input v-model="usuario.nome" type="text" class="form-control" id="nome">
+              </div>
+              <div class="form-group3">
+                <label for="nome_usuario">Nome de usuario:</label>
+                <input v-model="usuario.nome_usuario" type="text" class="form-control" id="nome_usuario">
               </div>
               <div class="form-group2">
                 <label for="email">E-mail:</label>
@@ -45,6 +49,7 @@ export default {
     return {
       usuario: {
         nome: "",
+        nome_usuario: "",
         email: "",
         senha: ""
       }
@@ -80,14 +85,19 @@ export default {
 .form-group {
   text-align: center;
   margin-top: 60px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .form-group2 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-align: center;
 }
 
+.form-group3{
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 .button-container {
   margin-top: 10px;
   gap: 10px;

@@ -5,6 +5,8 @@ import UsuarioHomeView from '../views/UsuarioHomeView.vue'
 import CadastroView from '../views/CadastroView.vue'
 import CriarListaComprasView from '../views/CriarListaView.vue';
 import VerListaComprasView from '../views/VerListaView.vue';
+import CriarGrupoView from '../views/CriarGrupoView.vue';
+import VerGrupoView from '../views/VerGrupoView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,6 +44,27 @@ const router = createRouter({
       path: "/ver-lista",
       name: "VerListaCompras",
       component: VerListaComprasView,
+    },
+    {
+      path: "/criar-grupo",
+      name: "CriarGrupo",
+      component: CriarGrupoView,
+    },
+    {
+      path: "/ver-grupo",
+      name: "VerGrupo",
+      component: VerGrupoView
+    },
+    {
+      path: '/adicionar-itens/:listaId',
+      name: 'AdicionarItens',
+      component: () => import('../views/AdicionarItensView.vue')
+    },
+    {
+      path: '/ver-itens/:listaId',
+      name: 'VerItensLista',
+      component: () => import('../views/VerItensLista.vue'),
+      props: true // Permite passar parâmetros como props
     }
   ]
 })

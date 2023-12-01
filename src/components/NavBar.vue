@@ -19,13 +19,13 @@
             <router-link to="/home" class="nav-link">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/about" class="nav-link">About</router-link>
+            <router-link to="/about" class="nav-link">Sobre</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="#" class="nav-link">List</router-link>
+            <router-link to="#" class="nav-link">Lista</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="#" class="nav-link">Group</router-link>
+            <router-link to="#" class="nav-link">Grupo</router-link>
           </li>
         </ul>
       </div>
